@@ -6,6 +6,11 @@ package frc.robot.subsystems;
 
 import java.util.Map;
 
+import com.ctre.phoenix.motorcontrol.TalonSRXControlMode;
+import com.ctre.phoenix.motorcontrol.VictorSPXControlMode;
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import com.ctre.phoenix.motorcontrol.can.VictorSPX;
+//import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 import com.ctre.phoenix6.controls.DutyCycleOut;
 import com.ctre.phoenix6.hardware.TalonFX;
 
@@ -15,18 +20,19 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 
 public class ShooterSubsystem extends SubsystemBase {
-  TalonFX motor1;
+  TalonSRX motor1;
   /** Creates a new ExampleSubsystem. */
   public ShooterSubsystem() {
-    motor1 = new TalonFX(0);
+    
+    motor1 = new TalonSRX(54);
   }
 
   public void ShooterOut(double speed){
-    motor1.setControl(new DutyCycleOut(speed));
+    motor1.set(TalonSRXControlMode.PercentOutput, speed);
   }
 
   public void ShooterStop(){
-   motor1.set(0);
+   motor1.set(TalonSRXControlMode.PercentOutput, 0);
   }
 
   /**
